@@ -95,35 +95,54 @@ with open('sonad.txt', encoding = 'utf-8') as f:
 			wordList.append(line)
 	#print(len(wordList))
 	#loop = True
-
-	while len(wordList) > 1:
-		result = bestLetter(wordList, letterList)
-		#print(result)
-		letter = result
-		#print(letter)
-		letterList.remove(letter)
-		print(letter.upper())
-		word = input().lower()
-		#print(word.find(letter))
-		if word.find(letter) != -1:
+	#2, 4, 5, 9
+	if wordLen != 2 or wordLen != 4 or wordLen != 5 or wordLen != 9:
+		while len(wordList) > 1:
+			result = bestLetter(wordList, letterList)
+			#print(result)
+			letter = result
 			#print(letter)
-			letterPos = scanWord(word, letter)
-			wordList = filterList(wordList, letter, letterPos)
-			#print('edasi')
-			#loop = False
+			letterList.remove(letter)
+			print(letter.upper())
+			word = input().lower()
+			#print(word.find(letter))
+			if word.find(letter) != -1:
+				#print(letter)
+				letterPos = scanWord(word, letter)
+				wordList = filterList(wordList, letter, letterPos)
+				#print('edasi')
+				#loop = False
+
+	else:
+		while len(wordList) > 1:
+			result = bestLetter(wordList, letterList)
+			#print(result)
+			letter = result
+			#print(letter)
+			letterList.remove(letter)
+			print(letter.upper())
+			word = input().lower()
+			#print(word.find(letter))
+			if word.find(letter) != -1:
+				#print(letter)
+				letterPos = scanWord(word, letter)
+				wordList = filterList(wordList, letter, letterPos)
+				#print('edasi')
+				#loop = False
 
 
-	'''while len(wordList) > 1: #Leiab parima tähe ja pakub neid seni, kuni jääb alles üks sõna
-					guess = findLetter(wordList, letterList)
-					letterList.remove(guess[0])
-					#count += 1
-					#print('List len:', len(wordList))
-					#print('Guessed letter:', guess[0], '|| Occurance:', guess[1])
-					print(guess[0].upper())
-					#print(wordList)
-					#print(letterList)
-					word = input().lower()
-					letterPos = scanWord(word, guess[0])
-					wordList = filterList(wordList, guess[0], letterPos)'''
+		'''while len(wordList) > 1: #Leiab parima tähe ja pakub neid seni, kuni jääb alles üks sõna
+				guess = findLetter(wordList, letterList)
+				letterList.remove(guess[0])
+				#count += 1
+				#print('List len:', len(wordList))
+				#print('Guessed letter:', guess[0], '|| Occurance:', guess[1])
+				print(guess[0].upper())
+				#print(wordList)
+				#print(letterList)
+				word = input().lower()
+				letterPos = scanWord(word, guess[0])
+				wordList = filterList(wordList, guess[0], letterPos)'''
+
 	print(wordList[0].upper())
 	#print(count)
