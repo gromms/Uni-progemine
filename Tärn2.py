@@ -23,8 +23,8 @@ def findOccurance(wordList, letter, occurance): #Leiab tähtede sisalduvuse antu
 def bestLetter(wordList, letterList):
 	currentBest = ['', 0]
 	occurance = 0
-	print(len(letterList))
-	print(len(wordList))
+	#print(len(letterList))
+	#print(len(wordList))
 	#print('letter list:', letterList)
 	#print('letter list len:', len(letterList))
 	for letter in range(0, len(letterList)):
@@ -33,7 +33,7 @@ def bestLetter(wordList, letterList):
 				occurance += 1
 		contains = occurance / len(wordList)
 		occurance = 0
-		print(letterList[letter], contains)
+		#print(letterList[letter], contains)
 		if contains > currentBest[1]:
 			currentBest[0] = letterList[letter]
 			currentBest[1] = contains
@@ -93,7 +93,7 @@ with open('sonad.txt', encoding = 'utf-8') as f:
 			break
 		elif len(line) == wordLen:
 			wordList.append(line)
-	print(len(wordList))
+	#print(len(wordList))
 	loop = True
 
 	while loop:
@@ -104,12 +104,12 @@ with open('sonad.txt', encoding = 'utf-8') as f:
 		letterList.remove(letter)
 		print(letter.upper())
 		word = input().lower()
-		print(word.find(letter))
+		#print(word.find(letter))
 		if word.find(letter) != -1:
 			#print(letter)
 			letterPos = scanWord(word, letter)
 			wordList = filterList(wordList, letter, letterPos)
-			print('edasi')
+			#print('edasi')
 			loop = False
 
 
