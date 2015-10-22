@@ -64,7 +64,7 @@ with open('sonad.txt', encoding = 'utf-8') as f:
 	wordList = []
 
 	letterList = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','r','s','t','u','v','w','õ','ä','ö','ü','x','y']
-
+	print(len(letterList))
 	while 1: #Loeb alles jäänud sõnad vastavalt ette antud sõna pikkusele failist listi
 		line = f.readline().strip()
 		if not line:
