@@ -7,6 +7,8 @@
 #6. korda 3-5 kuni jääb alles 1 sõna
 #7. paku sõna
 
+#Esiteks leian võimalikult kiiresti ühe sisalduva tähe
+
 from math import *
 import string
 
@@ -18,6 +20,26 @@ def findOccurance(wordList, letter, occurance): #Leiab tähtede sisalduvuse antu
 	#print(letter, 'Occurance ratio =', occurance / len(wordList))
 	return occurance / len(wordList)
 
+def bestLetter(wordList, letterList):
+	currentBest = ['', 0]
+	occurance = 0
+	#print(len(letterList))
+	#print(len(wordList))
+	#print('letter list:', letterList)
+	#print('letter list len:', len(letterList))
+	for letter in range(0, len(letterList)):
+		for word in wordList:
+			if word.find(letterList[letter]) != -1:
+				occurance += 1
+		contains = occurance / len(wordList)
+		occurance = 0
+		#print(letterList[letter], contains)
+		if contains > currentBest[1]:
+			currentBest[0] = letterList[letter]
+			currentBest[1] = contains
+			#print(currentBest)
+
+	return currentBest[0]
 
 def filterList(wordList, letter, letterPos): #letterPos - list, mis sisaldab tähtede asukohta antud sõnas
 	newList = []
@@ -64,25 +86,45 @@ with open('sonad.txt', encoding = 'utf-8') as f:
 	wordList = []
 
 	letterList = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','r','s','t','u','v','w','õ','ä','ö','ü','x','y']
-	print(len(letterList))
+
 	while 1: #Loeb alles jäänud sõnad vastavalt ette antud sõna pikkusele failist listi
 		line = f.readline().strip()
 		if not line:
 			break
 		elif len(line) == wordLen:
 			wordList.append(line)
+	#print(len(wordList))
+	#loop = True
+	if wordLen != 2 and wordLen != 7 and wordLen != 6:
+		while len(wordList) > 1:
+			result = bestLetter(wordList, letterList)
+			#print(result)
+			letter = result
+			#print(letter)
+			letterList.remove(letter)
+			print(letter.upper())
+			word = input().lower()
+			#print(word.find(letter))
+			if word.find(letter) != -1:
+				#print(letter)
+				letterPos = scanWord(word, letter)
+				wordList = filterList(wordList, letter, letterPos)
+				#print('edasi')
+				#loop = False
 
-	while len(wordList) > 1: #Leiab parima tähe ja pakub neid seni, kuni jääb alles üks sõna
-		guess = findLetter(wordList, letterList)
-		letterList.remove(guess[0])
-		#count += 1
-		#print('List len:', len(wordList))
-		#print('Guessed letter:', guess[0], '|| Occurance:', guess[1])
-		print(guess[0].upper())
-		#print(wordList)
-		#print(letterList)
-		word = input().lower()
-		letterPos = scanWord(word, guess[0])
-		wordList = filterList(wordList, guess[0], letterPos)
+
+	else:
+		while len(wordList) > 1: #Leiab parima tähe ja pakub neid seni, kuni jääb alles üks sõna
+			guess = findLetter(wordList, letterList)
+			letterList.remove(guess[0])
+			#count += 1
+			#print('List len:', len(wordList))
+			#print('Guessed letter:', guess[0], '|| Occurance:', guess[1])
+			print(guess[0].upper())
+			#print(wordList)
+			#print(letterList)
+			word = input().lower()
+			letterPos = scanWord(word, guess[0])
+			wordList = filterList(wordList, guess[0], letterPos)
 	print(wordList[0].upper())
 	#print(count)
